@@ -1,22 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dn.ftc.javafx.controller.TestController">
    <children>
-      <Button fx:id="startButton" layoutX="137.0" layoutY="540.0" mnemonicParsing="false" onAction="#onStartButtonClick" prefHeight="100.0" prefWidth="150.0" text="Start" />
-      <Button layoutX="587.0" layoutY="540.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" text="Stop" />
-      <TextField fx:id="extensionField" layoutX="138.0" layoutY="225.0" />
-      <Label fx:id="extensionLabel" layoutX="138.0" layoutY="208.0" prefWidth="149.0" text="max. Ausfahrlänge in mm" />
-      <TextField fx:id="forceField" layoutX="308.0" layoutY="225.0" />
-      <Label fx:id="forceLabel" layoutX="308.0" layoutY="208.0" prefWidth="149.0" text="max. Kraft in N" />
-      <TextField fx:id="strokesField" layoutX="469.0" layoutY="225.0" />
-      <Label fx:id="strokesLabel" layoutX="469.0" layoutY="208.0" prefWidth="149.0" text="Hübe" />
-      <CheckBox fx:id="upCheckbox" layoutX="138.0" layoutY="300.0" mnemonicParsing="false" text="Hoch" />
-      <CheckBox fx:id="downCheckbox" layoutX="139.0" layoutY="320.0" mnemonicParsing="false" text="Runter" />
-      <Label fx:id="directionLabel" layoutX="139.0" layoutY="280.0" text="Fahrtrichtung" />
-      <ChoiceBox fx:id="materialChoice" layoutX="654.0" layoutY="225.0" prefWidth="150.0" />
-      <Label fx:id="materialLabel" layoutX="654.0" layoutY="208.0" text="Material" />
+      <Pane layoutX="12.0" layoutY="21.0" prefHeight="100.0" prefWidth="250.0">
+         <children>
+            <TextField fx:id="maxExtensionField" layoutX="10.0" layoutY="30.0" onKeyTyped="#onLengthKeyTyped" />
+            <Label fx:id="maxExtensionLabel" layoutX="10.0" layoutY="15.0" prefWidth="149.0" text="max. Ausfahrlänge in mm" />
+            <CheckBox fx:id="maxExtensionCheckbox" layoutX="10.0" layoutY="55.0" mnemonicParsing="false" text="Aktiviert" />
+         </children>
+      </Pane>
+      <Pane layoutX="262.0" layoutY="21.0" prefHeight="100.0" prefWidth="250.0">
+         <children>
+            <TextField fx:id="maxForceField" layoutX="10.0" layoutY="30.0" onKeyTyped="#onForceKeyTyped" />
+            <Label fx:id="maxForceLabel" layoutX="10.0" layoutY="15.0" prefWidth="149.0" text="max. Kraft in N" />
+            <CheckBox fx:id="maxForceCheckbox" layoutX="10.0" layoutY="55.0" mnemonicParsing="false" text="Aktiviert" />
+         </children>
+      </Pane>
+      <Pane layoutX="512.0" layoutY="21.0" prefHeight="100.0" prefWidth="250.0">
+         <children>
+            <TextField fx:id="strokesField" layoutX="10.0" layoutY="30.0" />
+            <Label fx:id="strokesLabel" layoutX="10.0" layoutY="15.0" prefWidth="149.0" text="Hübe" />
+            <CheckBox fx:id="strokesCheckbox" layoutX="10.0" layoutY="55.0" mnemonicParsing="false" text="Aktiviert" />
+         </children>
+      </Pane>
+      <Pane layoutX="762.0" layoutY="21.0" prefHeight="100.0" prefWidth="250.0">
+         <children>
+            <ChoiceBox fx:id="materialChoice" layoutX="10.0" layoutY="30.0" prefWidth="150.0" />
+            <Label fx:id="materialLabel" layoutX="10.0" layoutY="15.0" text="Material" />
+         </children>
+      </Pane>
+      <Pane layoutX="1012.0" layoutY="21.0" prefHeight="100.0" prefWidth="100.0">
+         <children>
+            <CheckBox fx:id="upCheckbox" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" text="Hoch" />
+            <CheckBox fx:id="downCheckbox" layoutX="10.0" layoutY="55.0" mnemonicParsing="false" text="Runter" />
+            <Label fx:id="directionLabel" layoutX="10.0" layoutY="15.0" text="Fahrtrichtung" />
+         </children></Pane>
+      <Pane layoutX="12.0" layoutY="121.0" prefHeight="100.0" prefWidth="250.0">
+         <children>
+            <TextField fx:id="minExtensionField" layoutX="10.0" layoutY="30.0" onKeyTyped="#onLengthKeyTyped" />
+            <Label fx:id="minExtensionLabel" layoutX="10.0" layoutY="15.0" prefWidth="149.0" text="min. Ausfahrlänge in mm" />
+            <CheckBox fx:id="minExtensionCheckbox" layoutX="10.0" layoutY="55.0" mnemonicParsing="false" text="Aktiviert" />
+         </children>
+      </Pane>
+      <Pane layoutX="262.0" layoutY="121.0" prefHeight="100.0" prefWidth="250.0">
+         <children>
+            <TextField fx:id="minForceField" layoutX="10.0" layoutY="30.0" onKeyTyped="#onForceKeyTyped" />
+            <Label fx:id="minForceLabel" layoutX="10.0" layoutY="15.0" prefWidth="149.0" text="min. Kraft in N" />
+            <CheckBox fx:id="minForceCheckbox" layoutX="10.0" layoutY="55.0" mnemonicParsing="false" text="Aktiviert" />
+         </children>
+      </Pane>
+      <Pane layoutX="12.0" layoutY="233.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="startButton" layoutX="25.0" layoutY="55.0" mnemonicParsing="false" onAction="#onStartButtonClick" prefHeight="50.0" prefWidth="150.0" text="Start" />
+            <Button layoutX="25.0" layoutY="120.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Stop" />
+            <Label layoutX="25.0" layoutY="5.0" text="Automatische Testläufe" />
+         </children>
+      </Pane>
+      <Pane layoutX="262.0" layoutY="233.0" prefHeight="350.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="upButton" layoutX="25.0" layoutY="55.0" mnemonicParsing="false" onAction="#onUpButtonClick" prefHeight="50.0" prefWidth="150.0" text="Hoch" />
+            <Button fx:id="downButton" layoutX="25.0" layoutY="120.0" mnemonicParsing="false" onAction="#onDownButtonClick" prefHeight="50.0" prefWidth="150.0" text="Runter" />
+            <Label layoutX="25.0" layoutY="5.0" text="Manuelle Steuerung" />
+            <Button fx:id="centerButton" layoutX="25.0" layoutY="185.0" mnemonicParsing="false" onAction="#onCenterButtonClick" prefHeight="50.0" prefWidth="150.0" text="Zum Mittelpunkt" />
+            <Button fx:id="calibrateButon" layoutX="25.0" layoutY="250.0" mnemonicParsing="false" onAction="#onCalibrateButtonClick" prefHeight="50.0" prefWidth="150.0" text="Kraft kalibrieren " />
+         </children>
+      </Pane>
+      <Pane layoutX="512.0" layoutY="233.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="selectDriveButton" layoutX="25.0" layoutY="55.0" mnemonicParsing="false" onAction="#onSelectDriveButtonClick" prefHeight="50.0" prefWidth="150.0" text="Laufwerk auswählen" />
+            <Button fx:id="changeMaterialButton" layoutX="25.0" layoutY="120.0" mnemonicParsing="false" onAction="#onChangeMaterialButtonClick" prefHeight="50.0" prefWidth="150.0" text="Materialien ändern" />
+            <Label layoutX="25.0" layoutY="5.0" text="Einstellungen" />
+         </children>
+      </Pane>
+      <LineChart fx:id="forceGraph" layoutX="706.0" layoutY="221.0" prefHeight="225.0" prefWidth="500.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <LineChart fx:id="lengthGraph" layoutX="712.0" layoutY="471.0" prefHeight="225.0" prefWidth="500.0">
+         <xAxis>
+            <CategoryAxis side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis side="LEFT" />
+         </yAxis>
+      </LineChart>
    </children>
 </Pane>

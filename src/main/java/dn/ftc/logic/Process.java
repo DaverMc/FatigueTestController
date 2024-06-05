@@ -7,9 +7,12 @@ import dn.ftc.hardware.Piston;
 import dn.ftc.hardware.RaspberryPi;
 import dn.ftc.util.loging.Logger;
 
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Process {
+
     //Properties
     boolean minLengthSet = true;
     float minLength = -100f;
@@ -29,9 +32,59 @@ public class Process {
     int offsetIterations = 10;
     int maxErrors = 10;
 
-    public static void start() {
-       Process process = new Process();
-       Executors.newSingleThreadExecutor().execute(process::run);
+    private static Process instance;
+
+    private final ExecutorService service;
+    private Future<?> task;
+
+    private Process() {
+        this.service = Executors.newSingleThreadExecutor();
+    }
+
+    public static Process get() {
+        if(instance == null) instance = new Process();
+        return instance;
+    }
+
+    public boolean start() {
+        if(task == null) return false;
+        this.task = service.submit(this::run);
+        return true;
+    }
+
+    public boolean stop() {
+        if(this.task == null) return false;
+        this.task.cancel(true);
+        return true;
+    }
+
+    public void setUpDirection(boolean up) {
+        this.moveUp = up;
+    }
+
+    public void setDownDirection(boolean down) {
+        this.moveDown = down;
+    }
+
+    public void setExtensionLength(double length) {
+        boolean minLengthSet = true;
+        float minLength = -100f;
+        boolean maxLengthSet = true;
+        float maxLength = 100f;
+
+        // this.minLengthSet = (moveDown)? -length : 0;
+    }
+
+    public void setForce(double force) {
+
+    }
+
+    public void setStrokes(long strokes) {
+
+    }
+
+    public void setMaterial(String materialId) {
+
     }
 
     private void run() {
