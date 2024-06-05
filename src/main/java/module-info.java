@@ -15,4 +15,6 @@ module dn.ftc.javafx {
     exports dn.ftc.javafx;
 
     opens dn.ftc.javafx to javafx.fxml;
+    opens dn.ftc.javafx.controller to javafx.fxml;
+    exports dn.ftc.javafx.controller;
 }

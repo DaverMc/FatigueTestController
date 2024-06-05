@@ -10,7 +10,7 @@ public class FatigueTestController extends Application {
         SceneManager manager = new SceneManager(primaryStage, 1270, 920);
         manager.loadScenes("/scene");
         primaryStage.setTitle("Fatigue Test Controller");
-        manager.changeScene("hello-view");
+        manager.changeScene("00_Test");
         primaryStage.show();
     }
 }

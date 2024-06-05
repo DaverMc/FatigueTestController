@@ -8,6 +8,7 @@ import dn.ftc.util.Configuration;
 import dn.ftc.util.loging.Level;
 import dn.ftc.util.loging.Logger;
 import dn.ftc.util.sql.Database;
+import dn.ftc.util.sql.SQLiteDriver;
 import javafx.application.Application;
 import javafx.application.Platform;
 
@@ -25,7 +26,7 @@ public class Main {
         config.loadFromResource("config.properties");
 
         //Database
-        Database database = new Database(new Database.Config(config));
+        Database database = new Database(new SQLiteDriver(config.getString("db.filepath")), new Database.Config(config));
         Logger.addDatabaseHandler(database, Level.INFO);
 
         //Hardware
